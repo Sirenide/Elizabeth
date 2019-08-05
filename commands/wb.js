@@ -41,7 +41,7 @@ module.exports = {
 				try{
 				// This prints the timer from the sheet
 				rows.map((row) => {
-					message.channel.send(`**Olympus World Boss Timer Test**\nChannel: ${row[0]}\nNext Spawn: ${row[1]}\n\nServer Time: ${row[3]}`);
+					message.channel.send(`**Olympus World Boss Timer Test**\nChannel: ${row[0]}\nNext Spawn: ${row[1]}\nCountdown: ${row[2]}\n\nServer Time: ${row[3]}`);
 				})
 			}
 			catch {
