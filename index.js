@@ -25,7 +25,7 @@ client.once('ready', () => {
 client.on("guildCreate", guild => {
     // This event triggers when the bot joins a guild.
     console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-    client.user.setActivity(`Serving ${client.guilds.size} servers`);
+    client.user.setActivity(`with ${client.guilds.size} wonderful maidens`);
   });
   
   client.on("guildDelete", guild => {
@@ -50,7 +50,7 @@ client.on('message', async message => {
     	}
 
         if (command.guildOnly && message.channel.type !== 'text') {
-            return message.reply('I can\'t execute that command inside DMs!');
+            return message.reply('I can\'t execute that command inside DMs.');
         }    
 
     try {
