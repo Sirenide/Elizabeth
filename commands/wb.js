@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'wb',
-	description: 'World Boss Goat Timer',
+	description: 'World Boss Goat Timer. No reminder available yet.',
 	execute(message, args) {
 		const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 		const TOKEN_PATH = 'token.json';
@@ -41,11 +41,11 @@ module.exports = {
 				try{
 				// This prints the timer from the sheet
 				rows.map((row) => {
-					message.channel.send(`**Channel:** ${row[0]}\n**Next Spawn:** ${row[1]}\n**Countdown:** ${row[2]}\n\n**Server Time:** ${row[3]}`);
+					message.channel.send(`**Olympus World Boss Timer Test**\n**Channel:** ${row[0]}\n**Next Spawn:** ${row[1]}\n**Countdown:** ${row[2]}\n\n**Server Time:** ${row[3]}`);
 				})
 			}
 			catch {
-				console.log("ERROR");
+				console.log("Cannot fetch data.");
 			}
 			  } else {
 				message.channel.send('No data found.');

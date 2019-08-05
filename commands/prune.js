@@ -20,7 +20,9 @@ module.exports = {
             
         });
 
-        message.channel.send('I deleted ' + (amount - 1) + ' messages.');
+        message.channel.send('I deleted ' + (amount - 1) + ' messages.').then(msg => {
+			msg.delete(1500)
+		  });
                       
     },
 };
