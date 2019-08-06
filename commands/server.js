@@ -3,6 +3,6 @@ module.exports = {
     description: 'Shows the server info.',
     guildOnly: true,
 	execute(message, args) {
-		message.channel.send(`Server name: ${message.guild.name}\nTotal Members: ${message.guild.memberCount}\nCreation Date: ${message.guild.createdAt}`);
+		message.channel.send(`Server Name: ${message.guild.name}\nTotal Members: ${message.guild.memberCount}\nCreation Date: ${message.guild.createdAt}`);
 	},
 };

@@ -4,6 +4,9 @@ const {prefix, token, giphyToken} = require('./config.json');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
+//console time stamp
+require('console-stamp')(console, '[HH:MM:ss.l]');
+
 // Giphy
 var GphApiClient = require('giphy-js-sdk-core');
 giphy = GphApiClient(giphyToken);
@@ -19,40 +22,47 @@ for (const file of commandFiles) {
 const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
-    console.log('Ready!');
-    console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+    console.log('\"I\'m very thirsty today.\"');
+    console.log(`Started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} servers.`);
     client.user.setActivity(`with ${client.guilds.size} wonderful maidens`);
 })
 
 client.on("guildCreate", guild => {
     // This event triggers when the bot joins a guild.
-    console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+    console.log(`Joined\nServer: ${guild.name} (${guild.id})\Maiden Count: ${guild.memberCount}\nCreation Date: ${guild.createdAt}`);
     client.user.setActivity(`with ${client.guilds.size} wonderful maidens`);
+
   });
   
   client.on("guildDelete", guild => {
     // this event triggers when the bot is removed from a guild.
-    console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
+    console.log(`Removed from:\nServer: ${guild.name} (${guild.id})`);
     client.user.setActivity(`with ${client.guilds.size} beautiful maidens`);
   });
 
 client.on('message', async message => {
 
-    // Only allow commands in #bot-cave
-    if (!msg.channel.id === '512985991620067368') return;
-
     if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-    const args = message.content.slice(prefix.length).split(' ');
+    
+    const args = message.content.slice(prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
 
     if (!client.commands.has(commandName)) return;
 
     const command = client.commands.get(commandName);
 
+    // Returns a console message if a user uses a bot command
+    console.log(`I was commanded with the following request:\nUser: ${message.author.tag} (${message.author.id})\nServer: ${message.guild.name} (${message.guild.id})\nChannel: ${message.channel.name} (${message.channel.id})\nMessage: ${prefix}${command.name} ${args}`);
+
     if (command.args && !args.length) {
-    		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
-    	}
+        let reply = `You didn't provide any arguments, ${message.author}!`;
+
+        if (command.usage) {
+            reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+        }
+
+        return message.channel.send(reply);
+    }
 
         if (command.guildOnly && message.channel.type !== 'text') {
             return message.reply('I can\'t execute that command inside DMs.');
@@ -81,7 +91,7 @@ client.on('message', async message => {
     
     catch (error) {
         console.error(error);
-        message.reply('did you drop your cat on the keyboard or something?');
+        message.reply(`did you drop your cat on the keyboard or something?\n(Type \`${prefix}\`help for commands)`);
     }
 })
 

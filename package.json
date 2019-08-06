@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "console-stamp": "^0.2.9",
     "discord.js": "^11.5.1",
     "giphy-js-sdk-core": "^1.0.6",
     "google-spreadsheet": "^2.0.7",
