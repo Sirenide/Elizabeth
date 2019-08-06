@@ -16,10 +16,12 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
+const cooldowns = new Discord.Collection();
+
 client.once('ready', () => {
     console.log('Ready!');
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
-    client.user.setActivity(`with ${client.guilds.size} wonderful girls`);
+    client.user.setActivity(`with ${client.guilds.size} wonderful maidens`);
 })
 
 client.on("guildCreate", guild => {
@@ -31,10 +33,13 @@ client.on("guildCreate", guild => {
   client.on("guildDelete", guild => {
     // this event triggers when the bot is removed from a guild.
     console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-    client.user.setActivity(`with ${client.guilds.size} beautiful women`);
+    client.user.setActivity(`with ${client.guilds.size} beautiful maidens`);
   });
 
 client.on('message', async message => {
+
+    // Only allow commands in #bot-cave and #staff-bot
+    if (!msg.channel.id === '512985991620067368', '512961413044502528') return;
 
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -51,7 +56,24 @@ client.on('message', async message => {
 
         if (command.guildOnly && message.channel.type !== 'text') {
             return message.reply('I can\'t execute that command inside DMs.');
-        }    
+        }
+    
+    if (!cooldowns.has(command.name)) {
+	    cooldowns.set(command.name, new Discord.Collection());
+    }
+
+    const now = Date.now();
+    const cdtimestamps = cooldowns.get(command.name);
+    const cooldownAmount = (command.cooldown || 3) * 1000;
+
+    if (cdtimestamps.has(message.author.id)) {
+        const expirationTime = cdtimestamps.get(message.author.id) + cooldownAmount;
+    
+        if (now < expirationTime) {
+            const timeLeft = (expirationTime - now) / 1000;
+            return message.reply(`wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+        }
+    }
 
     try {
         command.execute(message, args);
