@@ -2,6 +2,8 @@ module.exports = {
 	name: 'wb',
 	description: 'World Boss Goat Timer. No reminder available yet.',
 	execute(message, args) {
+		if (!message.channel.id === '512985991620067368') return; 
+
 		const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 		const TOKEN_PATH = 'token.json';
 		const fs = require('fs');
