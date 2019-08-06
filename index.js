@@ -38,8 +38,8 @@ client.on("guildCreate", guild => {
 
 client.on('message', async message => {
 
-    // Only allow commands in #bot-cave and #staff-bot
-    if (!msg.channel.id === '512985991620067368', '512961413044502528') return;
+    // Only allow commands in #bot-cave
+    if (!msg.channel.id === '512985991620067368') return;
 
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
