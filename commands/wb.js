@@ -2,8 +2,7 @@ module.exports = {
 	name: 'wb',
 	description: 'World Boss Goat Timer. No reminder available yet.',
 	execute(message, args) {
-		if (!message.channel.id === '512985991620067368') {
-
+		
 			const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 			const TOKEN_PATH = 'token.json';
 			const fs = require('fs');
@@ -36,22 +35,33 @@ module.exports = {
 				sheets.spreadsheets.values.get({
 				spreadsheetId: '1wfGp6fZxmFSPIXmgTGxWkJuIzqngGh-PFac8UBsgrEI',  // Personal goat sheet
 				range: 'Sheet1!A2:D2',
-				}, (err, res) => {
-				if (err) return console.log('The API returned an error: ' + err);
+				}, 
+				(err, res) => {
+					if (err) return console.log('The API returned an error: ' + err);
+
 				const rows = res.data.values;
+
+				// moment-tz.js
+				var moment = require('moment-timezone');
+				const formattedTime = moment().tz("America/New_York").format('hh:mm:ss A z');
+				const formattedDate = moment().tz("America/New_York").format('dddd, MMMM Do YYYY');
+
 				if (rows.length) {
-					try{
+
+					try {
 					// This prints the timer from the sheet
 					rows.map((row) => {
-						message.channel.send(`**Olympus World Boss Timer Test**\nChannel: ${row[0]}\nNext Spawn: ${row[1]}\nCountdown: ${row[2]}\n\nServer Time: ${row[3]}`);
+						message.channel.send(`**Olympus World Boss Timer Test**\nChannel: ${row[0]}\nNext Spawn: ${row[1]}\nCountdown: ${row[2]}\n\nServer Time: ${formattedTime}\nServer Date: ${formattedDate}`);
 					})
-				}
+					}
+
 				catch {
-					console.log("Cannot fetch data.");
-				}
-				} else {
+					message.channel.send("Cannot fetch data.");
+					}
+				} 
+				else {
 					message.channel.send('No data found.');
-				}
+					}
 				
 				});
 			}
@@ -65,5 +75,4 @@ module.exports = {
 				}
 			)
 		}
-	}
 };
