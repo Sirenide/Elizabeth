@@ -1,37 +1,51 @@
 module.exports = {
 	name: 'kick',
-    description: 'Kicks a member from the server.',
-    guildOnly: true,
+	description: 'Kicks a member from the server.',
+	guildOnly: true,
 	async execute(message, args) {
-        message.channel.send("Sorry babe, it's disabled.");
-        // Let's first check if we have a member and if we can kick them!
-        // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
-        // We can also support getting the member by ID, which would be args[0]
-        /*
-        let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
-        if(message.member.hasPermission(['BAN_MEMBERS', 'KICK_MEMBERS'])){
+		// Current problem: The command won't read the JSON file the command works
+		/*
+        If the kick function will be disabled, use this
+        message.channel.send('Sorry babe, it\'s disabled.');
+         */
 
-            if(!member)
-            return message.reply("Please mention a valid member of this server");
-            if(!member.kickable) 
-            return message.reply("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
-        
-            // slice(1) removes the first part, which here should be the user mention or ID
-            // join(' ') takes all the various parts to make it a single string.
-            let reason = args.slice(1).join(` `);
-            if(!reason) reason = "No reason provided.";
-            
-            // Now, time for a swift kick in the nuts!
-            await member.kick(reason)
-            .catch(error => message.reply(`Sorry ${message.author} I couldn't kick because of : ${error}`));
-            message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason} \nHow rough~`);
+		const member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
-        } 
-        else {
-            message.channel.send("You don't have enough permissions, babe.")
+		const fs = require('fs');
+		const fetchJSON = fs.readFileSync('./strings/strings.json');
+		const string = JSON.parse(fetchJSON);
 
-        /* let member = message.mentions.members.first();
+		if (!member) {
+			return message.reply(string.InvalidMember);
+		}
+
+		if (!member.kickable) {
+			return message.reply(string.KickError);
+		}
+
+		if (message.member.hasPermission(['BAN_MEMBERS', 'KICK_MEMBERS'])) {
+			try {
+				// slice(1) removes the first part, which here should be the user mention or ID
+				// join(' ') takes all the various parts to make it a single string.
+				let reason = args.slice(1).join(' ');
+				if (!reason) reason = 'No reason provided.';
+
+				// Kicking the member
+				await member.kick(reason)
+					.catch(error => message.reply(`Sorry ${message.author}, I couldn't kick because of: ${error}`));
+				message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason} \nHow rough~`);
+
+			}
+
+			catch {
+				return message.reply(string.NoPerms);
+			}
+		}
+
+		/* Kicking with a gif
+
+        let member = message.mentions.members.first();
         member.kick().then((member) => {
 
             // Searching giphy for gifs
@@ -41,8 +55,8 @@ module.exports = {
                     var totalResponses = response.data.length;
                     var responseIndex = Math.floor((Math.random() * 10) +1) % totalResponses;
                     var responseFinal = response.data[responseIndex];
-                    
-                    
+
+
                     // Message sent to discord after kicking
                     message.channel.send(":wave: " + member.displayName + " has been kicked!", {
                         // The gif image sent
@@ -59,10 +73,9 @@ module.exports = {
                     message.channel.send("Error Kicking!");
                 })
 
-                
-            }) 
-            
-        
-    } */
-    },
+
+            })
+        }
+        */
+	},
 };

@@ -1,0 +1,8 @@
+{
+    "InvalidMember": "please mention a valid member of this server.",
+    "KickError": "I cannot kick this user. Do they have a higher role? Do I have kick permissions?",
+    "NoPerms": "you do not have enough permissions.",
+
+    "wbCantData": "Cannot fetch the goat data.",
+    "wbNoData": "No goat data found."
+}
