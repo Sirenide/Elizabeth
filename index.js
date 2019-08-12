@@ -5,7 +5,7 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
 // console time stamp
-require('console-stamp')(console, '[HH:MM:ss]');
+require('console-stamp')(console, '[hh:MM:ss TT]');
 
 // moment-tz.js
 const moment = require('moment-timezone');
@@ -25,22 +25,17 @@ client.once('ready', () => {
 	console.log(`Awakened: ${formattedDate}`);
 	console.log(`\"I\'m very thirsty today. ${client.user.tag} is ready to feast.\"`);
 	console.log(`Started with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} servers.`);
-	client.user.setActivity(`with ${client.guilds.size} wonderful maidens`);
 });
 
 
 client.on('guildCreate', guild => {
 	// This event triggers when the bot joins a guild.
 	console.log(`I joined something new~\nServer Name: ${guild.name} (${guild.id})\Maiden Count: ${guild.memberCount}\nCreation Date: ${guild.createdAt}`);
-	client.user.setActivity(`with ${client.guilds.size} wonderful maidens`);
-
 });
 
 client.on('guildDelete', guild => {
 	// this event triggers when the bot is removed from a guild.
 	console.log(`Removed from:\nServer: ${guild.name} (${guild.id})`);
-	client.user.setActivity(`with ${client.guilds.size} wonderful maidens`);
-
 });
 
 client.on('message', async message => {
@@ -54,7 +49,7 @@ client.on('message', async message => {
 	const command = client.commands.get(commandName);
 
 	// Returns a console message if a user uses a bot command
-	console.log(`${formattedDate}\nI was commanded with the following request:\nUser: ${message.author.tag} (${message.author.id})\nServer: ${message.guild.name} (${message.guild.id})\nChannel: ${message.channel.name} (${message.channel.id})\nMessage: ${prefix}${command.name} ${args}`);
+	console.log(`${formattedDate}\nCommanded with the following request:\nUser: ${message.author.tag} (${message.author.id})\nServer: ${message.guild.name} (${message.guild.id})\nChannel: ${message.channel.name} (${message.channel.id})\nMessage: ${prefix}${command.name} ${args}`);
 
 	if (command.args && !args.length) {
 		let reply = `You didn't provide any arguments, ${message.author}!`;
@@ -71,7 +66,6 @@ client.on('message', async message => {
 	}
 
 	// For command cooldowns
-
 	if (!cooldowns.has(command.name)) {
 		cooldowns.set(command.name, new Discord.Collection());
 	}

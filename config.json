@@ -1,10 +1,4 @@
 { 
     "prefix": "$",
-    "token": "NjA4MTQwMDE1ODc2MzA5MDAy.XU90Cw.6ufVxuDAcnfRWMiI7pHSTxPXzDM",
-    "giphyToken": "Ku8tWCQn6KMYT1pwjNDe0aP2LJvU6YUZ",
-        "access_token":"ya29.GltbBwqy2PAbPWTomPDfMV3z_W08eXJTGYjHQ4UnyzDrGAHz3lae4AtNdLmefD1rJP9XtYNXqVtX0RG6q-NDNAnbm64RkjCz3S1O5tzSDYnB4OdQ1qbZyk-WMDpd",
-        "refresh_token":"1/7W1Q_y2ZVqY5Xl1HyTPwuIcUFxz2EIv8Kblsx2EH5KY",
-        "scope":"https://www.googleapis.com/auth/spreadsheets.readonly",
-        "token_type":"Bearer",
-        "expiry_date":1565003969748
+    "token": "NjA4MTQwMDE1ODc2MzA5MDAy.XU90Cw.6ufVxuDAcnfRWMiI7pHSTxPXzDM"
 }

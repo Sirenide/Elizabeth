@@ -1,8 +1,11 @@
 {
-    "InvalidMember": "please mention a valid member of this server.",
-    "KickError": "I cannot kick this user. Do they have a higher role? Do I have kick permissions?",
-    "NoPerms": "you do not have enough permissions.",
+    "invalidMember": "please mention a valid member of this server.",
+    "kickError": "I cannot kick this user. Do they have a higher role? Do I have kick permissions?",
+    "noPerms": "you do not have enough permissions.",
+    "commandDisabled": "Sorry babe, it's disabled",
+    "cantDM": "it seems like I can't DM you. Do you have DMs disabled?",
 
     "wbCantData": "Cannot fetch the goat data.",
-    "wbNoData": "No goat data found."
+    "wbNoData": "No goat data found.",
+    "wbNoToken": "there's no token available for access."
 }

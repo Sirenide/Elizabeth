@@ -1,5 +1,3 @@
-const { prefix } = require('../config.json');
-
 module.exports = {
 	name: 'help',
 	description: 'List all of my commands or info about a specific command.',
@@ -7,15 +5,21 @@ module.exports = {
 	usage: '[command name]',
 	cooldown: 5,
 	execute(message, args) {
+		const { prefix } = require('../config.json');
+		const fs = require('fs');
+		const fetchJSON = fs.readFileSync('./strings/strings.json');
+		const string = JSON.parse(fetchJSON);
 		const data = [];
 		const { commands } = message.client;
+
+		// Pre-made help from discordjs.guide => To rewrite
 
 		if (!args.length) {
 			data.push(`Hello, I\'m Elizabeth and I'm still under construction. My prefix is \`${prefix}\`.`);
 			data.push('Here\'s a list of all my commands:');
 			data.push(commands.map(command => command.name).join('\n'));
-			data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command.`);
-            
+			data.push(`\nYou can send \`${prefix}help commandname\` to get info on a specific command.`);
+
 			return message.author.send(data, { split: true })
 				.then(() => {
 					if (message.channel.type === 'dm') return;
@@ -24,7 +28,7 @@ module.exports = {
 				})
 				.catch(error => {
 					console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-					message.reply('it seems like I can\'t DM you. Do you have DMs disabled?');
+					message.reply(string.cantDM);
 				});
 		}
 

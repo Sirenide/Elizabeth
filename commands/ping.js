@@ -2,8 +2,8 @@ module.exports = {
 	name: 'ping',
 	cooldown: 5,
 	description: 'Ping?',
-	async execute(message, args) {
-		const m = await message.channel.send("Ping?");
-    	m.edit(`Pong~ Latency is ${m.createdTimestamp - message.createdTimestamp}ms.`);
+	async execute(message) {
+		const ping = await message.channel.send('Ping?');
+		ping.edit(`Pong~ Latency is ${ping.createdTimestamp - message.createdTimestamp}ms.`);
 	},
 };
