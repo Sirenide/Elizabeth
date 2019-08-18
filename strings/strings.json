@@ -9,6 +9,11 @@
     "wbNoData": "No goat data found.",
     "wbNoToken": "there's no token available for access.",
 
+    "notOwner": "request denied. You are not the bot owner!",
+
+    "setGameSuccess": "successfully changed my game name!",
+    "setGameError": "failed to set new game",
+
     "serverInfo": "Server Information 💬",
     "serverName": "Server Name",
     "serverID": "Server ID",

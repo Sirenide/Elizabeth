@@ -49,7 +49,7 @@ client.on('message', async message => {
 	const command = client.commands.get(commandName);
 
 	// Returns a console message if a user uses a bot command
-	console.info(`${formattedDate}\nCommanded with the following request:\nUser: ${message.author.tag} (${message.author.id})\nServer: ${message.guild.name} (${message.guild.id})\nChannel: ${message.channel.name} (${message.channel.id})\nMessage: ${prefix}${command.name} ${args}`);
+	console.info(`${formattedDate}\nCommanded with the following request:\nUser: ${message.author.tag} (${message.author.id})\nServer: ${message.guild.name} (${message.guild.id})\nChannel: ${message.channel.name} (${message.channel.id})\nMessage: ${prefix}${command.name} ${args.join(' ')}`);
 
 	if (command.args && !args.length) {
 		let reply = `You didn't provide any arguments, ${message.author}!`;
@@ -90,10 +90,6 @@ client.on('message', async message => {
 	catch (error) {
 		console.error(error);
 		message.reply(`did you drop your cat on the keyboard or something?\n(Type \`${prefix}help\` for commands)`);
-	}
-
-	if (command === "points") {
-		return message.reply(`You currently have ${score.points} points and are level ${score.level}!`);
 	}
 
 });
