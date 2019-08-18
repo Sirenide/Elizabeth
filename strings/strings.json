@@ -7,5 +7,15 @@
 
     "wbCantData": "Cannot fetch the goat data.",
     "wbNoData": "No goat data found.",
-    "wbNoToken": "there's no token available for access."
+    "wbNoToken": "there's no token available for access.",
+
+    "serverInfo": "Server Information 💬",
+    "serverName": "Server Name",
+    "serverID": "Server ID",
+    "serverMembers": "Member Count",
+    "serverBots": "Bot Count",
+    "serverOwner": "Server Owner",
+    "serverCreation": "Creation Date",
+    "serverChannels": "Channel Count",
+    "serverVerif": "Verification Level"
 }

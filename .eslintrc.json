@@ -1,5 +1,5 @@
 {
-	"extends": "eslint:recommended",
+	"extends": ["prettier"],
 	"env": {
 		"node": true,
 		"es6": true
@@ -7,6 +7,7 @@
 	"parserOptions": {
 		"ecmaVersion": 2019
 	},
+	"plugins": ["prettier"],
 	"rules": {
 		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
 		"comma-dangle": ["error", "always-multiline"],
@@ -29,6 +30,7 @@
 		"no-trailing-spaces": ["error"],
 		"no-var": "error",
 		"object-curly-spacing": ["error", "always"],
+		"prettier/prettier": "error",
 		"prefer-const": "error",
 		"quotes": ["error", "single"],
 		"semi": ["error", "always"],

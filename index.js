@@ -5,7 +5,7 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
 // console time stamp
-require('console-stamp')(console, '[hh:MM:ss TT]');
+require('console-stamp')(console, '[hh:MM:ss TT]' || options.include());
 
 // moment-tz.js
 const moment = require('moment-timezone');
@@ -23,14 +23,14 @@ const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
 	console.log(`Awakened: ${formattedDate}`);
-	console.log(`\"I\'m very thirsty today. ${client.user.tag} is ready to feast.\"`);
+	console.log(`\"${client.user.tag} is ready to feast.\"`);
 	console.log(`Started with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} servers.`);
 });
 
 
 client.on('guildCreate', guild => {
 	// This event triggers when the bot joins a guild.
-	console.log(`I joined something new~\nServer Name: ${guild.name} (${guild.id})\Maiden Count: ${guild.memberCount}\nCreation Date: ${guild.createdAt}`);
+	console.log(`I joined something new~\nServer Name: ${guild.name} (${guild.id})\nMaiden Count: ${guild.memberCount}\nCreation Date: ${guild.createdAt}`);
 });
 
 client.on('guildDelete', guild => {
@@ -49,7 +49,7 @@ client.on('message', async message => {
 	const command = client.commands.get(commandName);
 
 	// Returns a console message if a user uses a bot command
-	console.log(`${formattedDate}\nCommanded with the following request:\nUser: ${message.author.tag} (${message.author.id})\nServer: ${message.guild.name} (${message.guild.id})\nChannel: ${message.channel.name} (${message.channel.id})\nMessage: ${prefix}${command.name} ${args}`);
+	console.info(`${formattedDate}\nCommanded with the following request:\nUser: ${message.author.tag} (${message.author.id})\nServer: ${message.guild.name} (${message.guild.id})\nChannel: ${message.channel.name} (${message.channel.id})\nMessage: ${prefix}${command.name} ${args}`);
 
 	if (command.args && !args.length) {
 		let reply = `You didn't provide any arguments, ${message.author}!`;
@@ -91,6 +91,11 @@ client.on('message', async message => {
 		console.error(error);
 		message.reply(`did you drop your cat on the keyboard or something?\n(Type \`${prefix}help\` for commands)`);
 	}
+
+	if (command === "points") {
+		return message.reply(`You currently have ${score.points} points and are level ${score.level}!`);
+	}
+
 });
 
 client.login(token);

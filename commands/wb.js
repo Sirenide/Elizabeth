@@ -19,9 +19,9 @@ module.exports = {
 		 * @param {Object} credentials The authorization client credentials.
 		 * @param {function} callback The callback to call with the authorized client.
 		 */
-		function authorize(credentials, callback) {
+		function authorize (credentials, callback) {
 			const { client_secret, client_id, redirect_uris } = credentials.installed;
-			const oAuth2Client = new google.auth.OAuth2(
+			const oAuth2Client = new google.auth.OAuth2 (
 				client_id, client_secret, redirect_uris[0]);
 
 			// Previous token present?
@@ -60,11 +60,9 @@ module.exports = {
 						rows.map((row) => {
 							const wb = new Discord.RichEmbed()
 								.setTitle('Olympus World Boss Timer Test 0.2 🐐')
-								.setColor('#ff5252')
 								.setDescription(`• **Channel:** ${row[0]} \`(X: 161, Y: 784)\`\n• **Next Spawn:** ${row[1]}\n• **Countdown:** ${row[2]}\n• **Server Time:** ${formattedTime}\n• **Server Date:** ${formattedDate}`)
 								.addField('Source:', '• [Olympus World Boss Sheet](https://tinyurl.com/catalyst-ak)')
-								.setFooter(`Requested by ${message.author.tag}`);
-
+								.setFooter(`Requested by ${message.author.tag}`, 'https://i.imgur.com/qKiMtIX.png');
 							message.channel.send(wb);
 						});
 					}
@@ -81,8 +79,8 @@ module.exports = {
 		}
 
 		// This is where the bot executes sending the message
-		fs.readFile('credentials.json', (err, content) => {
-			if (err) return console.log('Error loading client secret file:', err);
+		fs.readFile('config.json', (error, content) => {
+			if (error) return console.log('Error loading client secret file:', error);
 			authorize(JSON.parse(content), goatPresence, message);
 		}
 		);

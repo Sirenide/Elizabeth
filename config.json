@@ -1,4 +1,21 @@
 { 
     "prefix": "$",
-    "token": "NjA4MTQwMDE1ODc2MzA5MDAy.XU90Cw.6ufVxuDAcnfRWMiI7pHSTxPXzDM"
+    "token": "NjA4MTQwMDE1ODc2MzA5MDAy.XU90Cw.6ufVxuDAcnfRWMiI7pHSTxPXzDM",
+    "ownerID": "174974756083335168",
+
+    "access_token":"ya29.GltnB0EKpFf1PBHqbBi52VdUoWFxWuGGMXO8Ld0MtZRu124X_GuEctHX5NHwZxYXjLWmowiZPvs8EoPaZW7siIKoB3qzVwIMoeVLIYHvK-B8KHZkNfxFREpAIjTG",
+    "refresh_token":"1/SJxiX2IaT4GjNEHUmgamVfZOpn7O-mQeVYo4UAlt4EY",
+    "scope":"https://www.googleapis.com/auth/spreadsheets.readonly",
+    "token_type":"Bearer",
+    "expiry_date":1566050434374,
+
+    "installed": {
+        "client_id":"720365595042-orpacgcsg8l09v5n45b9qpu3esvqv5qh.apps.googleusercontent.com",
+        "project_id":"quickstart-1564987215138",
+        "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+        "token_uri":"https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+        "client_secret":"IoaHeM-vEerQd6W-AyUcZCBx",
+        "redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]
+        }
 }
