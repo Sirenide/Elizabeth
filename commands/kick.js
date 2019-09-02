@@ -10,7 +10,7 @@ module.exports = {
 		const fetchJSON = fs.readFileSync('./strings/strings.json');
 		const string = JSON.parse(fetchJSON);
 
-		/*
+				/*
         If the kick function will be disabled, use this
         message.channel.send(string.commandDisabled);
          */

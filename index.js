@@ -30,12 +30,12 @@ client.once('ready', () => {
 
 client.on('guildCreate', guild => {
 	// This event triggers when the bot joins a guild.
-	console.log(`I joined something new~\nServer Name: ${guild.name} (${guild.id})\nMaiden Count: ${guild.memberCount}\nCreation Date: ${guild.createdAt}`);
+	console.info(`I joined something new~\nServer Name: ${guild.name} (${guild.id})\nMaiden Count: ${guild.memberCount}\nCreation Date: ${guild.createdAt}`);
 });
 
 client.on('guildDelete', guild => {
 	// this event triggers when the bot is removed from a guild.
-	console.log(`Removed from:\nServer: ${guild.name} (${guild.id})`);
+	console.info(`Removed from:\nServer: ${guild.name} (${guild.id})`);
 });
 
 client.on('message', async message => {
