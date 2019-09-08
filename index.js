@@ -11,11 +11,35 @@ require('console-stamp')(console, '[hh:MM:ss TT]' || options.include());
 const moment = require('moment-timezone');
 const formattedDate = moment().tz('America/New_York').format('dddd, MMMM Do YYYY hh:mm:ss A z');
 
-// Commands that only takes note of files with .js extension
+// Legit need help with properly nesting these...
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFilesAdmin = fs.readdirSync('./commands/admin').filter(file => file.endsWith('.js'));
+const commandFilesAK = fs.readdirSync('./commands/ak').filter(file => file.endsWith('.js'));
+const commandFilesInfo = fs.readdirSync('./commands/info').filter(file => file.endsWith('.js'));
+const commandFilesMisc = fs.readdirSync('./commands/misc').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
+}
+
+for (const file of commandFilesAdmin) {
+	const command = require(`./commands/admin/${file}`);
+	client.commands.set(command.name, command);
+}
+
+for (const file of commandFilesAK) {
+	const command = require(`./commands/ak/${file}`);
+	client.commands.set(command.name, command);
+}
+
+for (const file of commandFilesInfo) {
+	const command = require(`./commands/info/${file}`);
+	client.commands.set(command.name, command);
+}
+
+for (const file of commandFilesMisc) {
+	const command = require(`./commands/misc/${file}`);
 	client.commands.set(command.name, command);
 }
 
@@ -52,7 +76,7 @@ client.on('message', async message => {
 	console.info(`${formattedDate}\nCommanded with the following request:\nUser: ${message.author.tag} (${message.author.id})\nServer: ${message.guild.name} (${message.guild.id})\nChannel: ${message.channel.name} (${message.channel.id})\nMessage: ${prefix}${command.name} ${args.join(' ')}`);
 
 	if (command.args && !args.length) {
-		let reply = `You didn't provide any arguments, ${message.author}!`;
+		const reply = `You didn't provide any arguments, ${message.author}!`;
 
 		if (command.usage) {
 			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
@@ -82,14 +106,14 @@ client.on('message', async message => {
 			return message.reply(`wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
 		}
 	}
-
+	
 	try {
 		command.execute(message, args);
 	}
 
 	catch (error) {
 		console.error(error);
-		message.reply(`did you drop your cat on the keyboard or something?\n(Type \`${prefix}help\` for commands)`);
+		message.reply(`did you drop your cat on the keyboard or something? (Type \`${prefix}help\` for commands)`);
 	}
 
 });

@@ -11,7 +11,7 @@
 
     "notOwner": "request denied. You are not the bot owner!",
 
-    "setGameSuccess": "successfully changed my game name!",
+    "setGameSuccess": "I successfully changed my game name!",
     "setGameError": "failed to set new game",
 
     "serverInfo": "Server Information 💬",

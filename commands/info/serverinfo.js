@@ -8,7 +8,7 @@ module.exports = {
 		const string = JSON.parse(fetchJSON);
 		const Discord = require('discord.js');
 
-		let serVL = [
+		const serVerif = [
 			"None",
 			"Low",
 			"Medium",
@@ -25,7 +25,7 @@ module.exports = {
 			.addField(string.serverCreation, message.guild.createdAt.toUTCString().substr(0, 16), true)
 			.addField(string.serverMembers, message.guild.members.filter(member => !member.user.bot).size, true)
 			.addField(string.serverBots, message.guild.members.filter(member => member.user.bot).size, true)
-			.addField(string.serverVerif, serVL[message.guild.verificationLevel], true)
+			.addField(string.serverVerif, serVerif[message.guild.verificationLevel], true)
 			.addField(string.serverChannels, message.guild.channels.size, true)
 			.setFooter(`Requested by ${message.author.tag}`, 'https://i.imgur.com/qKiMtIX.png')
 		message.channel.send(serverInfo);

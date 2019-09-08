@@ -5,7 +5,7 @@ module.exports = {
 	usage: '[command name]',
 	cooldown: 5,
 	execute(message, args) {
-		const { prefix } = require('../config.json');
+		const { prefix } = require('../../config.json');
 		const fs = require('fs');
 		const fetchJSON = fs.readFileSync('./strings/strings.json');
 		const string = JSON.parse(fetchJSON);
@@ -24,7 +24,6 @@ module.exports = {
 				.then(() => {
 					if (message.channel.type === 'dm') return;
 					message.react('✅');
-					// message.reply('I\'ve sent you a DM with all my commands!');
 				})
 				.catch(error => {
 					console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
